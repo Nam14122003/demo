@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Inject, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from "@nestjs/common";
 import { UserDto } from "src/dto/user.dto";
 import { UserService } from "./user.service";
+import { plainToInstance } from "class-transformer";
 
 
 @Controller('users')
@@ -24,7 +25,7 @@ export default class UserController {
 
     @Post()
     createUser(@Body() dto: UserDto): UserDto{
-        return this.userService.create(dto);
+        return plainToInstance(UserDto, this.userService.create(dto));
     }
 
     @Get(':id')

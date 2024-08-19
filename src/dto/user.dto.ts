@@ -20,8 +20,8 @@ export class UserDto extends BaseDto{
     @Expose()
     @Transform(({obj}) => obj.firstName + ' ' + obj.lastName)
     fullName: string;
+    
     @ApiProperty({ example: '123123123'})
-    @Expose()
     @IsString()
     @IsNotEmpty()
     @MinLength(8)
