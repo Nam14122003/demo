@@ -1,15 +1,13 @@
 import { Module  } from "@nestjs/common";
 import { UserModule } from "./users/user.module";
-import { UserService } from "./users/user.service";
+import { UserMockService } from "./users/user-mock.service";
 
 @Module({
     imports: [UserModule],
-    providers: [
-        {
+    providers: [{
             provide: 'App_USER',
-            useClass: UserService
-        }
-    ]
+            useClass: UserMockService
+    }]
 
 })
 

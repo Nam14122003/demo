@@ -5,8 +5,8 @@ import { plainToInstance } from "class-transformer";
 
 
 @Controller('users')
-export default class UserController {      
-    constructor(@Inject('USER_SERVICE_NAM') private readonly userService: UserService) {
+export  class UserController {      
+    constructor(private readonly userService: UserService) {
 
     }
     @Get()

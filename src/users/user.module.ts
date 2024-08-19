@@ -1,14 +1,24 @@
 import { Module } from "@nestjs/common";
-import UserController from "./user.controller";
 import { UserService } from "./user.service";
-import { UserMockService } from "./user-mock.service";
+import { UserController } from "./user.controller";
+import { StoreConfig } from "src/store/store.config";
+
+
+
+const configFacebook = {
+    appId: 'facebook001',
+    appSecret: 'facebook001',
+}
 
 @Module({
     controllers: [UserController],
-    providers: [{
-        provide: 'USER_SERVICE_NAM',
-        useClass: UserMockService
-    }]
+    providers: [UserService, {
+        provide: 'STORE_CONFIG',
+        useValue: {
+            dir: 'store',
+            path: 'user'
+        } as StoreConfig
+    },],
 })
 export class UserModule {
 
