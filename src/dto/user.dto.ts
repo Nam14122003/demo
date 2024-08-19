@@ -5,20 +5,22 @@ import { BaseDto } from "src/common/base.dto";
 
 export class UserDto extends BaseDto{
 
-    @ApiProperty()
+    @ApiProperty({ example: 'lenam123'})
     @Expose()
     @IsString()
     @IsNotEmpty()
     username: string;
 
+    @ApiProperty({ example: 'Lê Đoàn Ngọc'})
     firstName: string;
 
+    @ApiProperty({ example: 'Nam'})
     lastName: string;
 
     @Expose()
     @Transform(({obj}) => obj.firstName + ' ' + obj.lastName)
     fullName: string;
-    @ApiProperty()
+    @ApiProperty({ example: '123123123'})
     @Expose()
     @IsString()
     @IsNotEmpty()

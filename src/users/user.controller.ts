@@ -1,11 +1,15 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from "@nestjs/common";
-import { plainToClass } from "class-transformer";
+import { Body, Controller, Get, Inject, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from "@nestjs/common";
 import { UserDto } from "src/dto/user.dto";
+import { UserService } from "./user.service";
+
 
 @Controller('users')
-export default class UserController {
+export default class UserController {      
+    constructor(@Inject('USER_SERVICE_NAM') private readonly userService: UserService) {
+
+    }
     @Get()
-    getUser() {
+    get() {
         return [
             {
                 name: 'giang',
@@ -20,15 +24,11 @@ export default class UserController {
 
     @Post()
     createUser(@Body() dto: UserDto): UserDto{
-        dto.createAt = new Date();
-        dto.id = 1;
-        dto.updatedAt = new Date();
-        console.log(dto);
-        return UserDto.plainToClass(dto);
+        return this.userService.create(dto);
     }
 
     @Get(':id')
-    getUserById(@Param('id') id: number) {
+    getUser(@Param('id') id: number) {
         console.log(id);
         return 'test';
     }
